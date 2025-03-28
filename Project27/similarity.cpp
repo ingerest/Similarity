@@ -8,7 +8,7 @@ public:
 		int big = 0;
 		int small = 0;
 
-		if (str1.length() <= str2.length())
+		if (str1.length() >= str2.length())
 		{
 			big = str1.length();
 			small = str2.length();
@@ -27,7 +27,8 @@ public:
 		{
 			return 0;
 		}
-
-		return 0;
+		
+		int gap = big - small;
+		return (1 - (double)gap / (double)small) * 60;
 	}
 };

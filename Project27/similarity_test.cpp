@@ -1,7 +1,6 @@
 #include "gmock/gmock.h"
 #include "similarity.cpp"
 
-
 TEST(TestGroup, TestSameLength)
 {
 	Similarity similarity;
@@ -14,6 +13,13 @@ TEST(TestGroup, TestDoubleDifferentLength)
 	Similarity similarity;
 	int result = similarity.getSimilarityScore("ASD", "DSADFD");
 	EXPECT_EQ(0, result);
+}
+
+TEST(TestGroup, TestPartialScore)
+{
+	Similarity similarity;
+	int result = similarity.getSimilarityScore("ASD", "DSAD");
+	EXPECT_EQ(40, result);
 }
 
 int main()
