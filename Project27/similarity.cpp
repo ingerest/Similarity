@@ -5,19 +5,10 @@ class Similarity
 public:
 	int getSimilarityScore(std::string str1, std::string str2)
 	{
-		int big = 0;
-		int small = 0;
+		int big = str1.length();
+		int small = str2.length();
 
-		if (str1.length() >= str2.length())
-		{
-			big = str1.length();
-			small = str2.length();
-		}
-		else
-		{
-			big = str2.length();
-			small = str1.length();
-		}
+		if (str1.length() < str2.length()) std::swap(big, small);
 
 		if (big == small)
 		{
