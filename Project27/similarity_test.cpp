@@ -8,7 +8,13 @@ public:
 
 	void executeSimilarity(int score, std::string str1, std::string str2)
 	{
-		int result = similarity.getSimilarityScore(str1, str2);
+		int result = similarity.getSimilarityLengthScore(str1, str2);
+		EXPECT_EQ(score, result);
+	}
+
+	void executeSimilarityAlpha(int score, std::string str1, std::string str2)
+	{
+		int result = similarity.getSimilarityAlphaScore(str1, str2);
 		EXPECT_EQ(score, result);
 	}
 };
@@ -28,6 +34,25 @@ TEST_F(TestFixture, TestPartialScore)
 	executeSimilarity(40, "ASD", "DSAD");
 }
 
+TEST_F(TestFixture, TestSameAlpha)
+{
+	executeSimilarityAlpha(40, "ASD", "DSA");
+}
+
+TEST_F(TestFixture, TestDifferentAlpha)
+{
+	executeSimilarityAlpha(0, "A", "BB");
+}
+
+TEST_F(TestFixture, TestSameAlpha2)
+{
+	executeSimilarityAlpha(40, "AAABB", "BA");
+}
+
+TEST_F(TestFixture, TestPartialScoreAlpha)
+{
+	executeSimilarityAlpha(20, "AA", "AAE");
+}
 int main()
 {
 	::testing::InitGoogleMock();
