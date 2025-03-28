@@ -9,6 +9,13 @@ TEST(TestGroup, TestSameLength)
 	EXPECT_EQ(60, result);
 }
 
+TEST(TestGroup, TestDoubleDifferentLength)
+{
+	Similarity similarity;
+	int result = similarity.getSimilarityScore("ASD", "DSADFD");
+	EXPECT_EQ(0, result);
+}
+
 int main()
 {
 	::testing::InitGoogleMock();
