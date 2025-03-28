@@ -1,25 +1,31 @@
 #include "gmock/gmock.h"
 #include "similarity.cpp"
 
-TEST(TestGroup, TestSameLength)
+class TestFixture : public ::testing::Test
 {
+public:
 	Similarity similarity;
-	int result = similarity.getSimilarityScore("ASD", "DSA");
-	EXPECT_EQ(60, result);
+
+	void executeSimilarity(int score, std::string str1, std::string str2)
+	{
+		int result = similarity.getSimilarityScore(str1, str2);
+		EXPECT_EQ(score, result);
+	}
+};
+
+TEST_F(TestFixture, TestSameLength)
+{
+	executeSimilarity(60, "ASD", "DSA");
 }
 
-TEST(TestGroup, TestDoubleDifferentLength)
+TEST_F(TestFixture, TestDoubleDifferentLength)
 {
-	Similarity similarity;
-	int result = similarity.getSimilarityScore("ASD", "DSADFD");
-	EXPECT_EQ(0, result);
+	executeSimilarity(0, "ASD", "DSADFD");
 }
 
-TEST(TestGroup, TestPartialScore)
+TEST_F(TestFixture, TestPartialScore)
 {
-	Similarity similarity;
-	int result = similarity.getSimilarityScore("ASD", "DSAD");
-	EXPECT_EQ(40, result);
+	executeSimilarity(40, "ASD", "DSAD");
 }
 
 int main()
